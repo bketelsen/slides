@@ -40,8 +40,6 @@ slides build
 Then hook up the `/public` directory to something like Netlify and *profit*
 
 
-x
-
 Use local images
 ----
 Store pictures you want to use in the images subfolder, slides/images/ and reference them in the editor as Markdown:
