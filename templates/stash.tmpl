@@ -1,0 +1,42 @@
+{{ define "stash.tmpl"}}
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Hacker Slides</title>
+
+        <link rel="stylesheet" href="/static/css/index.css">
+    </head>
+
+    <body>
+        <div id="stash-pane">
+          <div id="controls">
+          <a href="/stash" target="_blank" onclick="save();"> Stash</a> |
+            <a href="/published/{{ .pubTo}}" target="_blank" onclick="save();"> Present</a> |
+            <a href="/published/{{ .pubTo}}?print-pdf" target="_blank" onclick="save();"> Pdf</a>
+          </div>
+          <div></div>
+          <div id ="list">
+            <table>
+              <tr>
+                <th>Name</th>
+                <th>Action</th>
+              </tr>
+{{range .stash}}
+	      <tr>
+		<td><p>{{.}}</p></td>
+		<td><a href="/stash/edit/{{.}}" target ="_blank" onclick="save();">Edit</a></td>
+	      </tr>
+{{end}}
+            </table>
+          </div>
+        </div>
+
+        <script src="/static/js/save.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</html>
+
+{{ end }}
