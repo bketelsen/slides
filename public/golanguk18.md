@@ -108,7 +108,7 @@
 - Future-proof design to allow multiple hash algorithms
 - Modules downloaded, validated and signed by `Notaries`
 
---- 
+---
 
 ## Notaries
 
@@ -147,7 +147,7 @@
 - `$GOPATH/go.key` and/or `$GOROOT/go.key` 
 - Keys will be weighted, with a `1.0` score required for acceptance 
 
---- 
+---
 
 ## Example go.key file
 
@@ -167,7 +167,7 @@
 - Geographically distributed proxy servers
 - Public servers, dependable infrastructure
 
---- 
+---
 
 ## Run Your Own Proxy
 

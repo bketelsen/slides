@@ -14,6 +14,7 @@ This repo is a reworked version of [Sandstorm Hacker Slides](https://github.com/
 - Pdf print
 - [Live version](https://talks.bjk.fyi)
 
+[![Video Demo](https://img.youtube.com/vi/qtwVtNwbV20/0.jpg)](https://www.youtube.com/watch?v=qtwVtNwbV20)
 
 | Edit mode | Published  |
 | --- | --- |
