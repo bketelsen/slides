@@ -39,13 +39,11 @@ type Slide struct {
 // buildCmd represents the build command
 var buildCmd = &cobra.Command{
 	Use:   "build",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Prepare your slides for publishing",
+	Long: `Build prepares your slides for publishing by 
+merging them into html templates and publishing in the
+/public directory which is suitable for publishing with
+a static web server or CDN.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		log.Println("Building Slides")
 		templ := template.Must(template.New("").ParseFiles("templates/publish.tmpl"))

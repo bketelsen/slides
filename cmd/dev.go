@@ -36,13 +36,9 @@ import (
 // devCmd represents the dev command
 var devCmd = &cobra.Command{
 	Use:   "dev",
-	Short: "A brief description of your command",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
+	Short: "Start a local webserver to preview and edit slides.",
+	Long: `The dev command starts a local web server on port 8080
+where you can preview and live-edit your slides.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		r := NewApp()
 		port := "8080"
