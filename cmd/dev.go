@@ -24,7 +24,6 @@ import (
 
 	log "github.com/Sirupsen/logrus"
 	haikunator "github.com/atrox/haikunatorgo"
-	"github.com/bketelsen/slides/auth"
 	"github.com/bketelsen/slides/files"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-contrib/sessions/cookie"
@@ -77,7 +76,6 @@ func NewApp() *gin.Engine {
 		log.Fatalf("Failied to allocate cache %#v", err)
 	}
 	r.Use(sessions.Sessions(sessionHeader, store))
-	r.Use(auth.BasicAuth())
 
 	r.LoadHTMLGlob("templates/*.tmpl")
 	r.Static("/static", "./static")
