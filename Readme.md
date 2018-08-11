@@ -52,6 +52,11 @@ or as HTML:
 <img src="/images/demo.png">
 ```
 
+Built on Open Source
+----
+This project is a heavily modified fork of [hacker-slides](https://github.com/msoedov/hacker-slides) and is built on the[Shoulders of Giants](/SHOULDERS.md)
+
+
 Getting Help
 ------------
 
