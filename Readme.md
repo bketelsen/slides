@@ -16,7 +16,8 @@ This repo is a reworked version of [Sandstorm Hacker Slides](https://github.com/
 
 Getting Started
 ----
-*coming soon* : Install from releases, brew, apt, etc.
+Install from releases: [releases](https://github.com/bketelsen/slides/releases)
+*coming soon* : brew, apt, and friends
 
 Install from Source:
 
