@@ -22,6 +22,12 @@ install:
 publish: install
 	@slides build
 
+release-snapshot:
+	@goreleaser -snapshot
+
+release:
+	@goreleaser
+
 release:
 	@build
 	@push
