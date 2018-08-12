@@ -15,8 +15,6 @@
 package cmd
 
 import (
-	"bufio"
-	"bytes"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -27,14 +25,9 @@ import (
 	"text/template"
 
 	log "github.com/Sirupsen/logrus"
+	"github.com/kr/pretty"
 	"github.com/spf13/cobra"
 )
-
-type Slide struct {
-	MarkdownFile string
-	HTMLFile     string
-	Title        string
-}
 
 // buildCmd represents the build command
 var buildCmd = &cobra.Command{
@@ -65,36 +58,26 @@ a static web server or CDN.`,
 				}
 				publicMarkdown, err := os.OpenFile(filepath.Join("public", path), os.O_RDWR|os.O_CREATE, 0755)
 				if err != nil {
-					log.Println("Error opening public markdown", err)
 					return
 				}
-				bb, err := ioutil.ReadAll(publicMarkdown)
 
-				if err != nil {
-					log.Println("Error reading public markdown", err)
-					return
-				}
-				replaced := faReplace(string(bb))
-				fmt.Println(replaced)
-				_, err = publicMarkdown.WriteAt([]byte(replaced), 0)
-				if err != nil {
-					log.Println("Error writing public markdown", err)
-					return
-				}
-				publicMarkdown.Close()
-
+				slide, err := FromReader(publicMarkdown)
+				slide.HTMLFile = htmlpath
+				slide.MarkdownFile = path
 				htmlpath = filepath.Join("public", htmlpath)
 				hf, err := os.Create(htmlpath)
 				if err != nil {
 					log.Println("Error creating file: ", err)
 					return
 				}
-				slide, err := getSlide(path)
+
+				_, err = publicMarkdown.WriteAt([]byte(slide.Source), 0)
 				if err != nil {
-					log.Println("Error reading slide: ", err)
+					log.Println("Error writing file: ", err)
 					return
 				}
-				slides = append(slides, slide)
+
+				slides = append(slides, *slide)
 				err = templ.ExecuteTemplate(hf, "publish.tmpl", slide)
 				if err != nil {
 					log.Println("Error executing template:", err)
@@ -121,6 +104,7 @@ a static web server or CDN.`,
 			log.Println("Error creating file: ", err)
 			return
 		}
+		pretty.Println(slides)
 		err = templ.ExecuteTemplate(hf, "root.tmpl", slides)
 		if err != nil {
 			log.Println("Error executing template:", err)
@@ -128,24 +112,6 @@ a static web server or CDN.`,
 		log.Println("Build completed")
 		return
 	},
-}
-
-func getSlide(path string) (Slide, error) {
-	slide := Slide{MarkdownFile: path}
-	htmlpath := strings.Replace(path, ".md", ".html", -1)
-	slide.HTMLFile = htmlpath
-	f, err := os.Open(filepath.Join("slides", path))
-	if err != nil {
-		return slide, err
-	}
-	r := bufio.NewReader(f)
-	bb, _, err := r.ReadLine()
-	if err != nil {
-		return slide, err
-	}
-	bb = bytes.Replace(bb, []byte("#"), []byte(""), -1)
-	slide.Title = string(bb)
-	return slide, nil
 }
 
 func init() {
