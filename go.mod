@@ -17,6 +17,7 @@ require (
 	github.com/mitchellh/go-homedir v0.0.0-20180801233206-58046073cbff
 	github.com/mitchellh/mapstructure v0.0.0-20180715050151-f15292f7a699 // indirect
 	github.com/pelletier/go-toml v1.2.0 // indirect
+	github.com/shurcooL/sanitized_anchor_name v0.0.0-20170918181015-86672fcb3f95 // indirect
 	github.com/spf13/afero v1.1.1 // indirect
 	github.com/spf13/cast v1.2.0 // indirect
 	github.com/spf13/cobra v0.0.3
@@ -28,5 +29,6 @@ require (
 	golang.org/x/sys v0.0.0-20180810173357-98c5dad5d1a0 // indirect
 	golang.org/x/text v0.3.0 // indirect
 	gopkg.in/go-playground/validator.v8 v8.18.2 // indirect
+	gopkg.in/russross/blackfriday.v2 v2.0.0
 	gopkg.in/yaml.v2 v2.2.1 // indirect
 )
