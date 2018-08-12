@@ -14,12 +14,14 @@ This repo is a reworked version of [Sandstorm Hacker Slides](https://github.com/
 - Pdf print
 - [Live version](https://talks.bjk.fyi)
 
-[![Video Demo](https://img.youtube.com/vi/qtwVtNwbV20/0.jpg)](https://www.youtube.com/watch?v=qtwVtNwbV20)
+Getting Started
+----
+*coming soon* : Install from releases, brew, apt, etc.
 
-| Edit mode | Published  |
-| --- | --- |
-| ![1st](https://sc-cdn.scaleengine.net/i/520e2f4a8ca107b0263936507120027e.png) | ![1st](https://sc-cdn.scaleengine.net/i/7ae0d31a40b0b9e7acc3f131754874cf.png) |
-|![2nd](https://sc-cdn.scaleengine.net/i/5acba66070e24f76bc7f20224adc611e.png) | ![2nd](https://sc-cdn.scaleengine.net/i/fee3e1374cb13b1d8c292becb7f514ae.png) |
+Install from Source:
+
+`go get github.com/bketelsen/slides`
+
 
 Initialize a New Slide Repository
 ----
@@ -81,6 +83,15 @@ or as HTML:
 ```
 <img src="/images/demo.png">
 ```
+
+Screenshots
+----
+
+| Edit mode | Published  |
+| --- | --- |
+| ![1st](https://sc-cdn.scaleengine.net/i/520e2f4a8ca107b0263936507120027e.png) | ![1st](https://sc-cdn.scaleengine.net/i/7ae0d31a40b0b9e7acc3f131754874cf.png) |
+|![2nd](https://sc-cdn.scaleengine.net/i/5acba66070e24f76bc7f20224adc611e.png) | ![2nd](https://sc-cdn.scaleengine.net/i/fee3e1374cb13b1d8c292becb7f514ae.png) |
+
 
 Built on Open Source
 ----
