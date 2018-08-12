@@ -1,5 +1,6 @@
 # This is an example goreleaser.yaml file with some sane defaults.
 # Make sure to check the documentation at http://goreleaser.com
+project_name: slides
 builds:
 - env:
   - CGO_ENABLED=0
@@ -20,3 +21,5 @@ changelog:
     exclude:
     - '^docs:'
     - '^test:'
+git:
+  short_hash: true

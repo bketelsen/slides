@@ -14,8 +14,19 @@
 
 package main
 
-import "github.com/bketelsen/slides/cmd"
+import (
+	"fmt"
+
+	"github.com/bketelsen/slides/cmd"
+)
+
+var (
+	version = "dev"
+	commit  = "none"
+	date    = "unknown"
+)
 
 func main() {
+	fmt.Printf("%v, commit %v, built at %v", version, commit, date)
 	cmd.Execute()
 }

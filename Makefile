@@ -1,6 +1,7 @@
 GIT_SUMMARY := $(shell git describe --tags --dirty --always)
 REPO=bketelsen/slides
 DOCKER_IMAGE := $(REPO):$(GIT_SUMMARY)
+
 default: publish
 
 repo:
@@ -26,8 +27,7 @@ release-snapshot:
 	@goreleaser -snapshot
 
 release:
-	@goreleaser
+	@goreleaser --release-notes<(github-release-notes -org bketelsen -repo slides -include-commits)
 
-release:
-	@build
-	@push
+release-notes:
+	@github-release-notes -org bketelsen -repo slides -include-commits
