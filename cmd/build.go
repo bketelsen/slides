@@ -25,7 +25,6 @@ import (
 	"text/template"
 
 	log "github.com/Sirupsen/logrus"
-	"github.com/kr/pretty"
 	"github.com/spf13/cobra"
 )
 
@@ -104,10 +103,13 @@ a static web server or CDN.`,
 			log.Println("Error creating file: ", err)
 			return
 		}
-		pretty.Println(slides)
 		err = templ.ExecuteTemplate(hf, "root.tmpl", slides)
 		if err != nil {
 			log.Println("Error executing template:", err)
+		}
+		err = buildBio()
+		if err != nil {
+			log.Println("Error building bio:", err)
 		}
 		log.Println("Build completed")
 		return
