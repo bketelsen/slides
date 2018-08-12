@@ -14,6 +14,7 @@ type Bio struct {
 	Bio      string
 	ShortBio string
 	Links    string
+	Images []string
 }
 
 func buildBio() error {
@@ -45,6 +46,16 @@ func buildBio() error {
 		log.Println("Error creating file: ", err)
 		return err
 	}
+	imagespath := filepath.Join("slides", "images", "bio")
+	images, err := ioutil.ReadDir(imagespath)
+    if err != nil {
+		log.Println("Error reading bio images directory: ", err)
+		return err
+	}
+	for _, i := range images {
+		imgsrc := filepath.Join("images", "bio", i.Name())
+		bio.Images = append(bio.Images, imgsrc)
+	}	
 
 	templ := template.Must(template.New("").ParseFiles("templates/bio.tmpl"))
 	err = templ.ExecuteTemplate(hf, "bio.tmpl", bio)
