@@ -27,7 +27,8 @@ release-snapshot:
 	@goreleaser -snapshot
 
 release:
-	@goreleaser --release-notes<(github-release-notes -org bketelsen -repo slides -include-commits)
+	@github-release-notes -org bketelsen -repo slides -include-commits > .releasenotes
+	@goreleaser --release-notes=.releasenotes
 
 release-notes:
 	@github-release-notes -org bketelsen -repo slides -include-commits
