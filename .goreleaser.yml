@@ -3,6 +3,10 @@
 project_name: slides
 builds:
 - 
+  goos:
+  - windows
+  - darwin
+  - linux
   env:
   - CGO_ENABLED=0
     # Custom ldflags templates.
