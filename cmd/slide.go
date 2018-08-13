@@ -3,6 +3,7 @@ package cmd
 import (
 	"io"
 	"io/ioutil"
+	"regexp"
 	"strings"
 )
 
@@ -38,6 +39,12 @@ func FromReader(r io.Reader) (*Slide, error) {
 func (s *Slide) Process() {
 	s.getMetadata()
 	s.Source = faReplace(string(s.Source))
+	lines := strings.Split(s.Source, "\n")
+	s.Source = ""
+	for _, line := range lines {
+		line = fragment(line)
+		s.Source = s.Source + line + "\n"
+	}
 }
 
 func (s *Slide) getMetadata() {
@@ -69,6 +76,7 @@ func (s *Slide) getMetadata() {
 		if strings.HasPrefix(line, "[videourl]") {
 			s.VideoURL = getValue(line)
 		}
+
 	}
 }
 
@@ -79,4 +87,18 @@ func getValue(s string) string {
 	s = strings.TrimLeft(s, "(")
 	s = strings.TrimRight(s, ")")
 	return s
+}
+func faReplace(text string) string {
+	re := regexp.MustCompile(`@fa\[([a-zA-Z0-9\s]*)\]`)
+	s := re.ReplaceAllString(text, "<i class='fas fa-$1'></i>")
+	return s
+}
+
+func fragment(text string) string {
+	if strings.HasSuffix(text, "|") {
+		text = text[:strings.LastIndex(text, "|")-1]
+		text = text + " <!-- .element: class='fragment' -->"
+	}
+	return text
+
 }

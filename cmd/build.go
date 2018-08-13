@@ -20,7 +20,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"regexp"
 	"strings"
 	"text/template"
 
@@ -202,10 +201,4 @@ func copyfile(source string, dest string) (err error) {
 	}
 
 	return
-}
-
-func faReplace(text string) string {
-	re := regexp.MustCompile(`@fa\[([a-zA-Z0-9\s]*)\]`)
-	s := re.ReplaceAllString(text, "<i class='fas fa-$1'></i>")
-	return s
 }
