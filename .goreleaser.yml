@@ -2,8 +2,13 @@
 # Make sure to check the documentation at http://goreleaser.com
 project_name: slides
 builds:
-- env:
+- 
+  env:
   - CGO_ENABLED=0
+    # Custom ldflags templates.
+    # Default is `-s -w -X main.version={{.Version}} -X main.commit={{.Commit}} -X main.date={{.Date}}`.
+  ldflags:
+  - -s -w -X main.Version={{.Version}} -X main.Commit={{.Commit}} -X main.Date={{.Date}}
 archive:
   replacements:
     darwin: Darwin

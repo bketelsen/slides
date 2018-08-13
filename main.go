@@ -21,12 +21,19 @@ import (
 )
 
 var (
-	version = "dev"
-	commit  = "none"
-	date    = "unknown"
+	Version = "dev"
+	Commit  = "none"
+	Date    = "unknown"
 )
 
 func main() {
-	fmt.Printf("%v, commit %v, built at %v", version, commit, date)
-	cmd.Execute()
+	cmd.Execute(VersionString())
+}
+
+// VersionString returns a formatted string with the version, commit, and date
+// included.
+func VersionString() string {
+
+	vs := fmt.Sprintf("%v, commit %v, built at %v", Version, Commit, Date)
+	return vs
 }

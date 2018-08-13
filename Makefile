@@ -17,6 +17,9 @@ push:
 	@docker push $(DOCKER_IMAGE)
 	@docker push $(REPO)
 
+clean:
+	@rm -rf dist/
+
 install:
 	@go install github.com/bketelsen/slides
 
@@ -24,9 +27,9 @@ publish: install
 	@slides build
 
 release-snapshot:
-	@goreleaser -snapshot
+	@goreleaser --snapshot
 
-release:
+release: clean
 	@github-release-notes -org bketelsen -repo slides -include-commits > .releasenotes
 	@goreleaser --release-notes=.releasenotes
 
