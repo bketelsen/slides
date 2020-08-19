@@ -1,0 +1,64 @@
+{{ define "root.tmpl" }}
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>Talks: Brian Ketelsen</title>
+
+		<meta name="description" content="Brian Ketelsen's presentations online">
+		<meta name="author" content="Brian Ketelsen">
+
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+		<link rel="stylesheet" href="css/landing.css">
+	</head>
+
+	<body>
+<div class="container">
+	<div class="row">
+		<h2 class="text-center">Brian Ketelsen - Talks</h2>
+		<h2 class="text-center"><a href="/bio.html">Biography</a></h2>
+        <hr/>
+	</div>
+    <div class="row">
+
+           {{ range $value := . }}
+		<div class="col-sm-6 col-md-4">
+            <div class="thumbnail">
+                <h4>
+                    {{ $value.Title }}
+                    <span class="label label-info info">
+                        <span data-toggle="tooltip" title="Video">Video <b class="glyphicon glyphicon-eye-open"></b></span>
+                        <span data-toggle="tooltip" title="Event">{{ $value.EventName}}</span>
+                    </span>
+                </h4>
+                <h4>
+					{{ $value.EventName}} - {{ $value.Date }} 
+				</h4>
+                <img src="{{ $value.Image }}" alt="{{ $value.ImageAlt }}">
+                <a href="/{{$value.HTMLFile}}" class="btn btn-primary col-xs-12" role="button">View</a>
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+            {{ end }}
+
+
+    </div>
+</div>
+
+	</body>
+	<script>
+	$(document).ready( function() {
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>
+</html>
+{{ end }}

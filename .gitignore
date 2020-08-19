@@ -25,10 +25,11 @@ src/
 slides/
 main
 node_modules
-hacker-slides
+slides
 vendor/
 .DS_Store
 slides
 .releasenotes
 .envrc
 dist
+statik/

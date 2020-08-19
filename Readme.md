@@ -37,7 +37,7 @@ git add --all
 ```
 Then edit anything you want to change in `publish.tmpl` for individual slides and `root.tmpl` for the talk listing page.
 
-`slides init` clones https://github.com/bketelsen/slides-template into the `mytalks` directory as a base for your decks.  The web assets in this directory are used to build the HTML files for your slides.
+`slides init` places the contents of the `slides-template` directory into the `mytalks` directory as a base for your decks.  The web assets in this directory are used to build the HTML files for your slides.
 
 Directory Structure Of a Slide Repository
 ------
@@ -74,6 +74,14 @@ slides build
 ```
 
 For maximum awesome, run `slides build` and setup Netlify or another static host to publish your `/public` directory.
+
+Serve The Published Directory Locally
+----
+```shell
+slides serve
+```
+
+Visit your site at http://127.0.0.1:8080
 
 Use local images
 ----

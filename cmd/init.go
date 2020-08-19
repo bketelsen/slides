@@ -16,11 +16,15 @@ package cmd
 
 import (
 	"errors"
+	"fmt"
+	"io/ioutil"
 	"os"
 	"os/exec"
 	"path/filepath"
 
 	log "github.com/Sirupsen/logrus"
+	_ "github.com/bketelsen/slides/statik"
+	"github.com/rakyll/statik/fs"
 	"github.com/spf13/cobra"
 )
 
@@ -28,8 +32,8 @@ import (
 var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Create a new slide repository.",
-	Long: `Init creates a new slide repository by cloning
-the slide assets required for building and serving the
+	Long: `Init creates a new slide repository by creating
+the slide assets required for building and serving
 slide decks.`,
 	Args: cobra.MinimumNArgs(1),
 	Run: func(cmd *cobra.Command, args []string) {
@@ -38,6 +42,7 @@ slide decks.`,
 			log.Println("Error creating slide repository:", err)
 			return
 		}
+		fmt.Printf("Repository created.  Now try `cd %s && slides dev`\n", args[0])
 	},
 }
 
@@ -47,11 +52,38 @@ func doInit(directoryName string) error {
 		return err
 	}
 	newRepoPath := filepath.Join(wd, directoryName)
-	log.Println("New slide repository location:", newRepoPath)
-	if err := checkNewPath(newRepoPath); err != nil {
+	if err = checkNewPath(newRepoPath); err != nil {
 		return err
 	}
-	if err := cloneTemplate(newRepoPath); err != nil {
+	log.Println("New slide repository location:", newRepoPath)
+	statikFS, err := fs.New()
+	if err != nil {
+		return err
+	}
+	err = fs.Walk(statikFS, "/", func(path string, fi os.FileInfo, err error) error {
+		if err != nil {
+			fmt.Println("err:", err)
+			return err
+		}
+		fpj := filepath.Join(newRepoPath, path)
+
+		if fi.IsDir() {
+			return os.MkdirAll(fpj, 0755)
+		} else {
+
+			bb, err := statikFS.Open(path)
+			if err != nil {
+				return err
+			}
+			ff, err := ioutil.ReadAll(bb)
+			if err != nil {
+				return err
+			}
+			return ioutil.WriteFile(fpj, ff, 0644)
+		}
+
+	})
+	if err != nil {
 		return err
 	}
 	return nil
@@ -99,4 +131,16 @@ func init() {
 	// Cobra supports local flags which will only run when this command
 	// is called directly, e.g.:
 	// initCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+}
+
+func readFile(filename string) ([]byte, error) {
+	return ioutil.ReadFile(filename)
+}
+
+func writeFile(basedir, filename string) error {
+	bb, err := readFile(filename)
+	if err != nil {
+		return err
+	}
+	return ioutil.WriteFile(filepath.Join(basedir, filename), bb, 0644)
 }

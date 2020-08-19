@@ -1,20 +1,21 @@
 package cmd
 
 import (
+	"gopkg.in/russross/blackfriday.v2"
 	"io/ioutil"
 	"os"
 	"path/filepath"
 	"text/template"
-	"gopkg.in/russross/blackfriday.v2"
 
 	log "github.com/Sirupsen/logrus"
 )
+
 type Bio struct {
 	Name     string
 	Bio      string
 	ShortBio string
 	Links    string
-	Images []string
+	Images   []string
 }
 
 func buildBio() error {
@@ -48,14 +49,14 @@ func buildBio() error {
 	}
 	imagespath := filepath.Join("slides", "images", "bio")
 	images, err := ioutil.ReadDir(imagespath)
-    if err != nil {
+	if err != nil {
 		log.Println("Error reading bio images directory: ", err)
 		return err
 	}
 	for _, i := range images {
 		imgsrc := filepath.Join("images", "bio", i.Name())
 		bio.Images = append(bio.Images, imgsrc)
-	}	
+	}
 
 	templ := template.Must(template.New("").ParseFiles("templates/bio.tmpl"))
 	err = templ.ExecuteTemplate(hf, "bio.tmpl", bio)

@@ -1,0 +1,36 @@
+{{ define "index.tmpl" }}
+
+<!doctype html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+
+        <title>Hacker Slides</title>
+
+        <link rel="stylesheet" href="/static/css/index.css">
+        <link href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACgAAAAoCAYAAACM/rhtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAIsSURBVFhH7dg/SFVhGMfxg4FgJGVEGQSBBILYUAQl2NCftUkanKwhcmkQsq0iLIKiGiSwpQYDhSAadIlSl+aIpmzQzdwUTMToz/d3vQcuL885vnrP+16w+4MPeN7He9/nXj3nvOdN/oecxBUcLB1t5Dj6cKR0VMNcwx/8xQIuYhC/ymMrOIua5DBWoUbyzKMR0TMEqyFLL6JnDlYzlg+ImlOwGsmyjr2Ikla8gtVInlvYg2C5hGmkZ+12rGEMJ1BoXsOacLt0GdI3WkiaoU9uTVSN7ygsHXiMj/gGa8LN6Jr5FRO4A11Hg0WfXpM+wxN8KR+ndNZO4jamymOPEC03oUlflo6S5Bh+Im1Q33QTdGnRneQ39DvRshu670o7zlUcp05DCwn93IVCswtH0RbJIXhH347+mdM/Vyw6Cb1yBtYbhLYIr3TDeoPQluCVeoMZ6g1Wq95gtYI0qMXrfeh+69a0annnjOUJ0qCWXsow3NoFaJnmjmcJ0uAMlHG4tcs44IzlCdLgGyhaXrm1G1DSXYbNBGnwORRrcXEPirZE3JolSIN3oehG79ZeQPkMt2YJ0mA/GqAVs1t7C+U93JrFu8GtLLd6oG03q/YJyiisuusHvKJnCfchKIu21jqdsdQslKew6q6H8I7vkl/baudhTbgMZT+s11aq3PwsPAOwGhRNXpNoa1dbFyPI23XQLfABrkMnU7RchdVQFu0qbOnJrYjsQ4snPSnuxCTJP2DL0jFAlrNjAAAAAElFTkSuQmCC" rel="icon" type="image/x-icon">
+    </head>
+
+    <body>
+        <div id="edit-pane">
+          <div id="controls">
+            <a href="/stash" target="_blank" onclick="save();"> Decks</a> |
+            <a href="/published/{{ .pubTo}}" target="_blank" onclick="save();"> Present</a> |
+            <a href="/published/{{ .pubTo}}?print-pdf" target="_blank" onclick="save();"> Pdf</a>
+          </div>
+          <div id="editor"></div>
+        </div>
+        <div id="preview">
+            <iframe id="slides-frame" src="/published/{{ .pubTo}}?preview"></iframe>
+        </div>
+
+        <script src="/static/ace/ace.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/static/jquery/jquery-3.3.1.min.js"></script>
+        <script src="/static/jquery/jquery-debounce-1.0.6.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/static/js/save.js" type="text/javascript" charset="utf-8"></script>
+        <script src="/static/js/index.js" type="text/javascript" charset="utf-8"></script>
+    </body>
+</html>
+
+{{ end }}
