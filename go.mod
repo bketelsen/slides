@@ -1,5 +1,7 @@
 module github.com/bketelsen/slides
 
+go 1.15
+
 require (
 	github.com/Sirupsen/logrus v1.0.6
 	github.com/atrox/haikunatorgo v2.0.0+incompatible
